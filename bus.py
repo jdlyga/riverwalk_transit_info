@@ -6,16 +6,18 @@ from selenium.webdriver.chrome.options import Options
 from dataclasses import dataclass
 import requests
 
+
 @dataclass
 class BusInfo:
     travelDirection: str
     travelTime: int
 
     def __repr__(self):
-        if self.travelTime: 
+        if self.travelTime:
             return f"{self.travelDirection}: {self.travelTime} minutes"
         else:
             return f"{self.travelDirection}: No upcoming buses"
+
 
 def get_html(url):
 
@@ -25,7 +27,7 @@ def get_html(url):
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
-    options.add_argument('--headless')
+    options.add_argument("--headless")
     options.binary_location = "/usr/bin/chromium-browser"
 
     # Create a new instance of the Chrome driver
@@ -42,24 +44,28 @@ def get_html(url):
 
     return html
 
-TO_NEW_YORK = "https://mybusnow.njtransit.com/bustime/wireless/html/eta.jsp?route=158&direction=New+York&id=21923&showAllBusses=on"
+
+TO_NEW_YORK = (
+    "https://mybusnow.njtransit.com/bustime/wireless/html/eta.jsp?route=158&direction=New+York&id=21923&showAllBusses=on"
+)
 NJ_158 = "https://mybusnow.njtransit.com/bustime/wireless/html/eta.jsp?route=158&direction=Fort+Lee&id=26229&showAllBusses=off"
+
 
 def get_bus_info(description, url):
     html = get_html(url)
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
 
     minutes = None
-    element = soup.find('strong', class_='larger', text=lambda text: text and 'MIN' in text)
-    
-    #template for print(f"***{description}***")
+    element = soup.find("strong", class_="larger", text=lambda text: text and "MIN" in text)
+
+    # template for print(f"***{description}***")
     if element:
         text = element.text.strip()
-        minutes = text.split(u"\xa0")[0]
-        #print(f"Next bus in {minutes} minutes")
+        minutes = text.split("\xa0")[0]
+        # print(f"Next bus in {minutes} minutes")
         return minutes
     else:
-        #print(f'No bus times available')
+        # print(f'No bus times available')
         return None
 
     # element = soup.find("span", class_="smaller")
@@ -67,7 +73,7 @@ def get_bus_info(description, url):
     # vehicle_number = text.split(" ")[1].replace(')','')
 
     # print(f"Vehicle Number: {vehicle_number}")
-    
+
     # print(vehicle_list)
 
 

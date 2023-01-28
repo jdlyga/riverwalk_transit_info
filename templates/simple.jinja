@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Port Imperial Transportation Information</title>
+  </head>
+  <style>
+    body {
+      font-size: 1.5em; /* increase the font size */
+    }
+  </style>
+  <body>
+    <h1>Port Imperial Transportation Information</h1>
+    <h4>Updated: {{ time }}</h4>
+    <h2>Next Port Imperial Ferry</h2>
+    <ul>
+    {% for ferry in ferry_times %}
+      <li>{{ ferry }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Next Bus Times</h2>
+    <ul>
+    {% for bus in bus_info %}
+      <li>{{ bus }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Lincoln Tunnel Traffic</h2>
+    <ul>
+    {% for tunnel in tunnel_traffic %}
+      <li>Direction: {{ tunnel.travelDirection }} </li>
+      <ul>
+      <li>Estimated Travel Time: {{ tunnel.travelTime }} minutes</li>
+      <li>Average Speed: {{ tunnel.routeSpeed }} mph</li>
+      <li>Additional Info: {{ tunnel.infomationalText }} </li>
+      <li>Updated: {{ tunnel.timeStamp }} </li>
+      </ul>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
+
+

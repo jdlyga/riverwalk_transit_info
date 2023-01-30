@@ -38,25 +38,22 @@ def schedule(weekday, direction):
     return start_time, end_time, interval
 
 
-def next_ferry(direction):
-    current_time = datetime.datetime.now()
+def next_ferry(current_time, direction):
     weekday = current_time.weekday()
-
     start_time, end_time, interval = schedule(weekday=weekday, direction=direction)
-
-    next_ferry = None
-    while (next_ferry is None) or (next_ferry.time() < current_time.time()):
-        next_ferry = datetime.datetime.combine(datetime.datetime.today(), start_time)
+    
+    next_ferry = datetime.datetime.combine(datetime.datetime.today(), start_time)
+    while next_ferry.time() < current_time.time():
         next_ferry += datetime.timedelta(minutes=interval)
-        start_time = next_ferry.time()
     if next_ferry.time() > end_time:
         return None
-    else:
-        return (next_ferry - datetime.datetime.now()).seconds // 60
+
+    return (next_ferry - current_time).seconds // 60
 
 
 def get_summary():
-    midtown_minutes = next_ferry(TO_MIDTOWN)
-    portimperial_minutes = next_ferry(TO_PORTIMPERIAL)
+    current_time = datetime.datetime.now()
+    midtown_minutes = next_ferry(TO_MIDTOWN, current_time)
+    portimperial_minutes = next_ferry(TO_PORTIMPERIAL, current_time)
 
     return {TO_MIDTOWN: midtown_minutes, TO_PORTIMPERIAL: portimperial_minutes}

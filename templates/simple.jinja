@@ -13,8 +13,8 @@
     <h4>Updated: {{ time }}</h4>
     <h2>Next Port Imperial Ferry</h2>
     <ul>
-    {% for ferry in ferry_times %}
-      <li>{{ ferry }}</li>
+    {% for ferry in ferry_times.items() %}
+      <li>{{ ferry[0] }}: {{ ferry[1] }} minutes</li>
     {% endfor %}
     </ul>
 

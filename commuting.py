@@ -8,8 +8,10 @@ import bus
 
 traffic_info = traffic.get_traffic_info()
 print(traffic_info)
-ferry_info = ferry.get_port_imperial_times()
+
+ferry_info = ferry.get_summary()
 print(ferry_info)
+
 bus_info = bus.get_port_imperial_bus_info()
 print(bus_info)
 

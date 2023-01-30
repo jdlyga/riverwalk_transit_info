@@ -29,13 +29,13 @@ weekday_schedule = {
         "start_time": "6:00 AM",
         "end_time": "10:40 PM",
         "interval": 20,
-        "friday_end_time": "11:40 PM",
+        "special_end_time": "11:40 PM",  # friday
     },
     "Midtown to Port Imperial": {
         "start_time": "6:10 AM",
         "end_time": "10:50 PM",
         "interval": 20,
-        "friday_end_time": "11:50 PM",
+        "special_end_time": "11:50 PM",
     },
 }
 
@@ -44,51 +44,35 @@ weekend_schedule = {
         "start_time": "8:00 AM",
         "end_time": "10:40 PM",
         "interval": 20,
-        "saturday_end_time": "11:40 PM",
+        "special_end_time": "11:40 PM",  # saturday
     },
     "Midtown to Port Imperial": {
         "start_time": "8:10 AM",
         "end_time": "10:50 PM",
         "interval": 20,
-        "saturday_end_time": "11:50 PM",
+        "special_end_time": "11:50 PM",
     },
 }
 
 
-def get_next_ferry_time(schedule, direction):
-    now = datetime.now().time()
-    current_day = datetime.today().weekday()
-    if current_day in range(5):
-        start_time = datetime.strptime(schedule[direction]["start_time"], "%I:%M %p").time()
-        end_time = datetime.strptime(schedule[direction]["end_time"], "%I:%M %p").time()
-        interval = timedelta(minutes=schedule[direction]["interval"])
-        if current_day == 4:
-            end_time = datetime.strptime(schedule[direction]["friday_end_time"], "%I:%M %p").time()
-        next_ferry = None
-        while (next_ferry is None) or (next_ferry.time() < now):
-            next_ferry = datetime.combine(datetime.today(), start_time)
-            next_ferry += interval
-            start_time = next_ferry.time()
-        if next_ferry.time() > end_time:
-            return None
-        else:
-            return (next_ferry - datetime.now()).seconds // 60
+def get_next_ferry_time(schedule, direction, timeobj):
+    current_day = timeobj.weekday()
 
+    start_time = datetime.strptime(schedule[direction]["start_time"], "%I:%M %p").time()
+    end_time = datetime.strptime(schedule[direction]["end_time"], "%I:%M %p").time()
+    interval = timedelta(minutes=schedule[direction]["interval"])
+    if current_day in (4, 5):
+        end_time = datetime.strptime(schedule[direction]["special_end_time"], "%I:%M %p").time()
+
+    next_ferry = None
+    while (next_ferry is None) or (next_ferry.time() < timeobj.time()):
+        next_ferry = datetime.combine(datetime.today(), start_time)
+        next_ferry += interval
+        start_time = next_ferry.time()
+    if next_ferry.time() > end_time:
+        return None
     else:
-        start_time = datetime.strptime(schedule[direction]["start_time"], "%I:%M %p").time()
-        end_time = datetime.strptime(schedule[direction]["end_time"], "%I:%M %p").time()
-        interval = timedelta(minutes=schedule[direction]["interval"])
-        if current_day == 5:
-            end_time = datetime.strptime(schedule[direction]["saturday_end_time"], "%I:%M %p").time()
-        next_ferry = None
-        while (next_ferry is None) or (next_ferry.time() < now):
-            next_ferry = datetime.combine(datetime.today(), start_time)
-            next_ferry += interval
-            start_time = next_ferry.time()
-        if next_ferry.time() > end_time:
-            return None
-        else:
-            return (next_ferry - datetime.now()).seconds // 60
+        return (next_ferry - datetime.now()).seconds // 60
 
 
 # Example usage
@@ -98,11 +82,13 @@ def get_next_ferry_time(schedule, direction):
 
 def get_port_imperial_times():
 
+    timeobj = datetime.now()
+
     pi_midtown_minutes = get_next_ferry_time(
-        weekday_schedule if datetime.today().weekday() < 5 else weekend_schedule, "Port Imperial to Midtown"
+        weekday_schedule if datetime.today().weekday() < 5 else weekend_schedule, "Port Imperial to Midtown", timeobj
     )
     midtown_pi_minutes = get_next_ferry_time(
-        weekday_schedule if datetime.today().weekday() < 5 else weekend_schedule, "Midtown to Port Imperial"
+        weekday_schedule if datetime.today().weekday() < 5 else weekend_schedule, "Midtown to Port Imperial", timeobj
     )
 
     pi_midtown = FerryInfo("Port Imperial to Midtown", pi_midtown_minutes)

@@ -16,7 +16,7 @@ def test_next_ferry():
     assert result is not None
     
     # Test during weekend with service to midtown
-    current_time = datetime.datetime(2023, 1, 29)
+    current_time = datetime.datetime(2023, 1, 29, 10, 48)
     result = next_ferry(current_time, direction)
     assert result is not None
     

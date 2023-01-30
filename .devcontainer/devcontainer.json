@@ -10,7 +10,7 @@
 		}
 	},
 	"postCreateCommand": "pip3 install --user -r requirements.txt",
-	"containerEnv": { "TZ": "America/Chicago" }
+	"containerEnv": { "TZ": "America/NewYork" }
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

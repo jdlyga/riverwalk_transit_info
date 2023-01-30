@@ -28,7 +28,7 @@ def get_html(url):
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
     options.add_argument("--headless")
-    options.binary_location = "/usr/bin/chromium-browser"
+    #options.binary_location = "/usr/bin/chromium-browser"
 
     # Create a new instance of the Chrome driver
     driver = webdriver.Chrome(options=options)

@@ -23,7 +23,7 @@ env = Environment(loader=FileSystemLoader(templates_dir))
 template = env.get_template("simple.jinja")
 
 
-filename = os.path.join("/var/www/html/transit", "index.html")
+filename = os.path.join("./", "index.html")
 print(filename)
 
 with open(filename, "w") as fh:

@@ -39,4 +39,5 @@ def get_traffic_info() -> list[TrafficInfo]:
                 )
 
     info = list(parse_traffic_times(port_authority_json))
+    info.reverse()  # so midtown is first
     return info

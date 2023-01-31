@@ -5,6 +5,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
+    -webkit-transform:  scale(0.75,0.75);
+    -moz-transform:  scale(0.75,0.75);
+    transform-origin: top center;
     --bs-blue: #63b3ed;
     --bs-indigo: #596cff;
     --bs-purple: #6f42c1;

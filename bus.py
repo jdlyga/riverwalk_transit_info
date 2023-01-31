@@ -66,7 +66,7 @@ def get_bus_info(description, url):
         return minutes
     else:
         # print(f'No bus times available')
-        return None
+        return "(no data)"
 
     # element = soup.find("span", class_="smaller")
     # text = element.text.strip()

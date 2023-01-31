@@ -35,7 +35,7 @@ def get_traffic_info() -> list[TrafficInfo]:
                     element["routeSpeed"],
                     element["routeTravelTime"],
                     element["timeStamp"],
-                    element["infomationalText"],
+                    element["infomationalText"].capitalize(),
                 )
 
     info = list(parse_traffic_times(port_authority_json))

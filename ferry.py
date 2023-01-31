@@ -45,7 +45,7 @@ def next_ferry(current_time, direction):
     next_ferry = datetime.datetime.combine(datetime.datetime.today(), start_time)
 
     if current_time.time() > end_time or current_time.time() < start_time:
-        return None, None
+        return "(no data)", "(no data)"
 
     while next_ferry < current_time:
         next_ferry += datetime.timedelta(minutes=interval)

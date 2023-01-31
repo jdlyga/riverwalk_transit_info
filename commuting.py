@@ -22,7 +22,7 @@ import os
 root = os.path.dirname(os.path.abspath(__file__))
 templates_dir = os.path.join(root, "templates")
 env = Environment(loader=FileSystemLoader(templates_dir))
-template = env.get_template("simple.jinja")
+template = env.get_template("pretty.jinja")
 
 
 filename = os.path.join("./", "index.html")

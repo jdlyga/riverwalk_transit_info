@@ -29,7 +29,7 @@
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">{{ ferry[0] }}</p>
-                    <h5 class="font-weight-bolder mb-0">{{ ferry[1]['minutes'] }} minutes<div>{{ ferry[1]['time'] }}</div>
+                    <h5 class="font-weight-bolder mb-0">In {{ ferry[1]['minutes'] }} minutes<div>At {{ ferry[1]['time'] }}</div>
                     </h5>
                   </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">{{ bus.travelDirection }}</p>
-                    <h5 class="font-weight-bolder mb-0">{{ bus.travelTime }} minutes
+                    <h5 class="font-weight-bolder mb-0">In {{ bus.travelTime }} minutes
                     </h5>
                   </div>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">{{ tunnel.pretty_direction() }}</p>
-                    <h5 class="font-weight-bolder mb-0">{{ tunnel.travelTime }} minutes<div>{{ tunnel.routeSpeed }} mph</div><div>{{ tunnel.infomationalText }}</div>
+                    <h5 class="font-weight-bolder mb-0">{{ tunnel.travelTime }} minutes to cross<div>{{ tunnel.routeSpeed }} mph</div><div>{{ tunnel.infomationalText }}</div>
                     </h5>
                   </div>
                 </div>

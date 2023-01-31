@@ -7080,7 +7080,7 @@ fieldset:disabled .btn {
     margin-top: 1rem !important;
 }
 .mt-4 {
-    margin-top: 1.5rem !important;
+    margin-top: 0.1rem !important;
 }
 .mt-5 {
     margin-top: 3rem !important;
@@ -18166,7 +18166,7 @@ h2 {
 .h3,
 h3 {
     font-size: 1.875rem;
-    line-height: 1.375;
+    line-height: 1.0;
 }
 @media (max-width: 575.98px) {
     .h3,
@@ -18199,7 +18199,7 @@ h5 {
 .h6,
 h6 {
     font-size: 1rem;
-    line-height: 1.625;
+    line-height: 1.0;
 }
 .p,
 p {

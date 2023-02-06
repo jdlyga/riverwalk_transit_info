@@ -6,13 +6,20 @@ import traffic
 import ferry
 import bus
 
-traffic_info = traffic.get_traffic_info()
+try:
+    traffic_info = traffic.get_traffic_info()
+except Exception:
+    NO_DATA = "(no data)"
+    traffic_info = [traffic.TrafficInfo(NO_DATA, NO_DATA, NO_DATA, NO_DATA, NO_DATA), traffic.TrafficInfo(NO_DATA, NO_DATA, NO_DATA, NO_DATA, None)]
 print(traffic_info)
 
 ferry_info = ferry.get_summary()
 print(ferry_info)
 
-bus_info = bus.get_port_imperial_bus_info()
+try:
+    bus_info = bus.get_port_imperial_bus_info()
+except Exception:
+    bus_info = bus.BusInfo()
 print(bus_info)
 
 
